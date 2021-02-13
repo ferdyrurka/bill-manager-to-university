@@ -1,0 +1,527 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bank_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="current_ballance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="26" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="bank_id" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="updated_at" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="expenses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="expenses_type_id" Type="int" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="created_by_id" Type="int" Nullable="false" />
+          <Property Name="value" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="account_ballance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="updated_at" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="expenses_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="incomes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="incomes_type_id" Type="int" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="created_by_id" Type="int" Nullable="false" />
+          <Property Name="value" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="account_ballance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="updated_at" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="incomes_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_bank_account_bank_43CA0AD61790E7A4">
+          <End Role="bank" Type="Self.bank" Multiplicity="1" />
+          <End Role="bank_account" Type="Self.bank_account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bank">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bank_account">
+              <PropertyRef Name="bank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expenses_comapny_43CA0AD61790E7A4">
+          <End Role="company" Type="Self.company" Multiplicity="1" />
+          <End Role="expenses" Type="Self.expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expenses">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expenses_created_by_id_43CA0AD61790E7A4">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="expenses" Type="Self.expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expenses">
+              <PropertyRef Name="created_by_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expenses_expenses_type_43CA0AD6179E7A4">
+          <End Role="expenses_type" Type="Self.expenses_type" Multiplicity="1" />
+          <End Role="expenses" Type="Self.expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expenses_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expenses">
+              <PropertyRef Name="expenses_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_incomes_comapny_43CA0AD61790E7A4">
+          <End Role="company" Type="Self.company" Multiplicity="1" />
+          <End Role="incomes" Type="Self.incomes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="incomes">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_incomes_created_by_id_43CA0AD61790E7A4">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="incomes" Type="Self.incomes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="incomes">
+              <PropertyRef Name="created_by_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_incomes_incomes_type_43CA0AD6179E7A4">
+          <End Role="incomes_type" Type="Self.incomes_type" Multiplicity="1" />
+          <End Role="incomes" Type="Self.incomes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="incomes_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="incomes">
+              <PropertyRef Name="incomes_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="bank" EntityType="Self.bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bank_account" EntityType="Self.bank_account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="expenses" EntityType="Self.expenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="expenses_type" EntityType="Self.expenses_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="incomes" EntityType="Self.incomes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="incomes_type" EntityType="Self.incomes_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_bank_account_bank_43CA0AD61790E7A4" Association="Self.FK_bank_account_bank_43CA0AD61790E7A4">
+            <End Role="bank" EntitySet="bank" />
+            <End Role="bank_account" EntitySet="bank_account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expenses_comapny_43CA0AD61790E7A4" Association="Self.FK_expenses_comapny_43CA0AD61790E7A4">
+            <End Role="company" EntitySet="company" />
+            <End Role="expenses" EntitySet="expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expenses_created_by_id_43CA0AD61790E7A4" Association="Self.FK_expenses_created_by_id_43CA0AD61790E7A4">
+            <End Role="users" EntitySet="users" />
+            <End Role="expenses" EntitySet="expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expenses_expenses_type_43CA0AD6179E7A4" Association="Self.FK_expenses_expenses_type_43CA0AD6179E7A4">
+            <End Role="expenses_type" EntitySet="expenses_type" />
+            <End Role="expenses" EntitySet="expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_incomes_comapny_43CA0AD61790E7A4" Association="Self.FK_incomes_comapny_43CA0AD61790E7A4">
+            <End Role="company" EntitySet="company" />
+            <End Role="incomes" EntitySet="incomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_incomes_created_by_id_43CA0AD61790E7A4" Association="Self.FK_incomes_created_by_id_43CA0AD61790E7A4">
+            <End Role="users" EntitySet="users" />
+            <End Role="incomes" EntitySet="incomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_incomes_incomes_type_43CA0AD6179E7A4" Association="Self.FK_incomes_incomes_type_43CA0AD6179E7A4">
+            <End Role="incomes_type" EntitySet="incomes_type" />
+            <End Role="incomes" EntitySet="incomes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="bank_account" Relationship="Self.FK_bank_account_bank_43CA0AD61790E7A4" FromRole="bank" ToRole="bank_account" />
+        </EntityType>
+        <EntityType Name="bank_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="current_ballance" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="number" Type="String" MaxLength="26" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bank_id" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="bank" Relationship="Self.FK_bank_account_bank_43CA0AD61790E7A4" FromRole="bank_account" ToRole="bank" />
+        </EntityType>
+        <EntityType Name="company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="expenses" Relationship="Self.FK_expenses_comapny_43CA0AD61790E7A4" FromRole="company" ToRole="expenses" />
+          <NavigationProperty Name="incomes" Relationship="Self.FK_incomes_comapny_43CA0AD61790E7A4" FromRole="company" ToRole="incomes" />
+        </EntityType>
+        <EntityType Name="expenses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="expenses_type_id" Type="Int32" Nullable="false" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="created_by_id" Type="Int32" Nullable="false" />
+          <Property Name="value" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="account_ballance" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="company" Relationship="Self.FK_expenses_comapny_43CA0AD61790E7A4" FromRole="expenses" ToRole="company" />
+          <NavigationProperty Name="users" Relationship="Self.FK_expenses_created_by_id_43CA0AD61790E7A4" FromRole="expenses" ToRole="users" />
+          <NavigationProperty Name="expenses_type" Relationship="Self.FK_expenses_expenses_type_43CA0AD6179E7A4" FromRole="expenses" ToRole="expenses_type" />
+        </EntityType>
+        <EntityType Name="expenses_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="expenses" Relationship="Self.FK_expenses_expenses_type_43CA0AD6179E7A4" FromRole="expenses_type" ToRole="expenses" />
+        </EntityType>
+        <EntityType Name="incomes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="incomes_type_id" Type="Int32" Nullable="false" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="created_by_id" Type="Int32" Nullable="false" />
+          <Property Name="value" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="account_ballance" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="company" Relationship="Self.FK_incomes_comapny_43CA0AD61790E7A4" FromRole="incomes" ToRole="company" />
+          <NavigationProperty Name="users" Relationship="Self.FK_incomes_created_by_id_43CA0AD61790E7A4" FromRole="incomes" ToRole="users" />
+          <NavigationProperty Name="incomes_type" Relationship="Self.FK_incomes_incomes_type_43CA0AD6179E7A4" FromRole="incomes" ToRole="incomes_type" />
+        </EntityType>
+        <EntityType Name="incomes_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="incomes" Relationship="Self.FK_incomes_incomes_type_43CA0AD6179E7A4" FromRole="incomes_type" ToRole="incomes" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="expenses" Relationship="Self.FK_expenses_created_by_id_43CA0AD61790E7A4" FromRole="users" ToRole="expenses" />
+          <NavigationProperty Name="incomes" Relationship="Self.FK_incomes_created_by_id_43CA0AD61790E7A4" FromRole="users" ToRole="incomes" />
+        </EntityType>
+        <Association Name="FK_bank_account_bank_43CA0AD61790E7A4">
+          <End Role="bank" Type="Self.bank" Multiplicity="1" />
+          <End Role="bank_account" Type="Self.bank_account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bank">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bank_account">
+              <PropertyRef Name="bank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expenses_comapny_43CA0AD61790E7A4">
+          <End Role="company" Type="Self.company" Multiplicity="1" />
+          <End Role="expenses" Type="Self.expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expenses">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_incomes_comapny_43CA0AD61790E7A4">
+          <End Role="company" Type="Self.company" Multiplicity="1" />
+          <End Role="incomes" Type="Self.incomes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="incomes">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expenses_created_by_id_43CA0AD61790E7A4">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="expenses" Type="Self.expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expenses">
+              <PropertyRef Name="created_by_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expenses_expenses_type_43CA0AD6179E7A4">
+          <End Role="expenses_type" Type="Self.expenses_type" Multiplicity="1" />
+          <End Role="expenses" Type="Self.expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expenses_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="expenses">
+              <PropertyRef Name="expenses_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_incomes_created_by_id_43CA0AD61790E7A4">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="incomes" Type="Self.incomes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="incomes">
+              <PropertyRef Name="created_by_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_incomes_incomes_type_43CA0AD6179E7A4">
+          <End Role="incomes_type" Type="Self.incomes_type" Multiplicity="1" />
+          <End Role="incomes" Type="Self.incomes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="incomes_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="incomes">
+              <PropertyRef Name="incomes_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MoneyManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bank" EntityType="Self.bank" />
+          <EntitySet Name="bank_account" EntityType="Self.bank_account" />
+          <EntitySet Name="company" EntityType="Self.company" />
+          <EntitySet Name="expenses" EntityType="Self.expenses" />
+          <EntitySet Name="expenses_type" EntityType="Self.expenses_type" />
+          <EntitySet Name="incomes" EntityType="Self.incomes" />
+          <EntitySet Name="incomes_type" EntityType="Self.incomes_type" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="FK_bank_account_bank_43CA0AD61790E7A4" Association="Self.FK_bank_account_bank_43CA0AD61790E7A4">
+            <End Role="bank" EntitySet="bank" />
+            <End Role="bank_account" EntitySet="bank_account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expenses_comapny_43CA0AD61790E7A4" Association="Self.FK_expenses_comapny_43CA0AD61790E7A4">
+            <End Role="company" EntitySet="company" />
+            <End Role="expenses" EntitySet="expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_incomes_comapny_43CA0AD61790E7A4" Association="Self.FK_incomes_comapny_43CA0AD61790E7A4">
+            <End Role="company" EntitySet="company" />
+            <End Role="incomes" EntitySet="incomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expenses_created_by_id_43CA0AD61790E7A4" Association="Self.FK_expenses_created_by_id_43CA0AD61790E7A4">
+            <End Role="users" EntitySet="users" />
+            <End Role="expenses" EntitySet="expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expenses_expenses_type_43CA0AD6179E7A4" Association="Self.FK_expenses_expenses_type_43CA0AD6179E7A4">
+            <End Role="expenses_type" EntitySet="expenses_type" />
+            <End Role="expenses" EntitySet="expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_incomes_created_by_id_43CA0AD61790E7A4" Association="Self.FK_incomes_created_by_id_43CA0AD61790E7A4">
+            <End Role="users" EntitySet="users" />
+            <End Role="incomes" EntitySet="incomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_incomes_incomes_type_43CA0AD6179E7A4" Association="Self.FK_incomes_incomes_type_43CA0AD6179E7A4">
+            <End Role="incomes_type" EntitySet="incomes_type" />
+            <End Role="incomes" EntitySet="incomes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="MoneyManagerEntities">
+          <EntitySetMapping Name="bank">
+            <EntityTypeMapping TypeName="Model.bank">
+              <MappingFragment StoreEntitySet="bank">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bank_account">
+            <EntityTypeMapping TypeName="Model.bank_account">
+              <MappingFragment StoreEntitySet="bank_account">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="current_ballance" ColumnName="current_ballance" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="bank_id" ColumnName="bank_id" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company">
+            <EntityTypeMapping TypeName="Model.company">
+              <MappingFragment StoreEntitySet="company">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="expenses">
+            <EntityTypeMapping TypeName="Model.expenses">
+              <MappingFragment StoreEntitySet="expenses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="expenses_type_id" ColumnName="expenses_type_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="created_by_id" ColumnName="created_by_id" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="account_ballance" ColumnName="account_ballance" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="expenses_type">
+            <EntityTypeMapping TypeName="Model.expenses_type">
+              <MappingFragment StoreEntitySet="expenses_type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="incomes">
+            <EntityTypeMapping TypeName="Model.incomes">
+              <MappingFragment StoreEntitySet="incomes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="incomes_type_id" ColumnName="incomes_type_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="created_by_id" ColumnName="created_by_id" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="account_ballance" ColumnName="account_ballance" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="incomes_type">
+            <EntityTypeMapping TypeName="Model.incomes_type">
+              <MappingFragment StoreEntitySet="incomes_type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="Model.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
