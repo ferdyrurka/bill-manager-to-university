@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MoneyManagerToUniversity.controller
 {
     /// <summary>
-    /// Logika interakcji dla klasy BankAccount.xaml
+    /// Logika interakcji dla klasy BankAccountList.xaml
     /// </summary>
-    public partial class BankAccount : Window
+    public partial class BankAccountList : Page
     {
-        public BankAccount()
+        public BankAccountList()
         {
             InitializeComponent();
         }
