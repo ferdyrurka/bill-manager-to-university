@@ -1,12 +1,15 @@
-﻿<Window x:Class="MoneyManagerToUniversity.controller.BankAccount"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoneyManagerToUniversity.controller"
+        xmlns:MoneyManagerToUniversity="clr-namespace:MoneyManagerToUniversity" x:Class="MoneyManagerToUniversity.controller.BankAccount"
         mc:Ignorable="d"
-        Title="BankAccount" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="BankAccount" Height="450" Width="800" Loaded="Window_Loaded_1">
+    <Window.Resources>
+        <MoneyManagerToUniversity:MoneyManagerDataSet x:Key="moneyManagerDataSet"/>
+        <CollectionViewSource x:Key="bank_accountViewSource" Source="{Binding bank_account, Source={StaticResource moneyManagerDataSet}}"/>
+    </Window.Resources>
+    <Grid/>
 </Window>
