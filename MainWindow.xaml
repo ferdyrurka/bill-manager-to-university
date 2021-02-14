@@ -6,7 +6,13 @@
         xmlns:local="clr-namespace:MoneyManagerToUniversity"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="329*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="open_bank_account_crud" Content="Bank account" Grid.Column="0" Grid.Row="0" Click="OpenBankAccountCRUD" Width="100" VerticalAlignment="Top" HorizontalAlignment="Right"/>
     </Grid>
+
 </Window>

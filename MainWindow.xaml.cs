@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MoneyManagerToUniversity.controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace MoneyManagerToUniversity
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OpenBankAccountCRUD(object sender, RoutedEventArgs e)
+        {
+            Window window = new BankAccount();
+            window.Show();
         }
     }
 }
