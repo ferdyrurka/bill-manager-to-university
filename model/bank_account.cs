@@ -20,7 +20,6 @@ namespace MoneyManagerToUniversity.model
         public string name { get; set; }
         public int bank_id { get; set; }
         public System.DateTime created_at { get; set; }
-        public System.DateTime updated_at { get; set; }
     
         public virtual bank bank { get; set; }
     }

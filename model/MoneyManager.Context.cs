@@ -27,11 +27,9 @@ namespace MoneyManagerToUniversity.model
     
         public virtual DbSet<bank> bank { get; set; }
         public virtual DbSet<bank_account> bank_account { get; set; }
-        public virtual DbSet<company> company { get; set; }
         public virtual DbSet<expenses> expenses { get; set; }
         public virtual DbSet<expenses_type> expenses_type { get; set; }
         public virtual DbSet<incomes> incomes { get; set; }
         public virtual DbSet<incomes_type> incomes_type { get; set; }
-        public virtual DbSet<users> users { get; set; }
     }
 }

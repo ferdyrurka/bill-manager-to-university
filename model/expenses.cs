@@ -16,15 +16,10 @@ namespace MoneyManagerToUniversity.model
     {
         public int id { get; set; }
         public int expenses_type_id { get; set; }
-        public int company_id { get; set; }
-        public int created_by_id { get; set; }
         public decimal value { get; set; }
         public decimal account_ballance { get; set; }
         public System.DateTime created_at { get; set; }
-        public System.DateTime updated_at { get; set; }
     
-        public virtual company company { get; set; }
-        public virtual users users { get; set; }
         public virtual expenses_type expenses_type { get; set; }
     }
 }

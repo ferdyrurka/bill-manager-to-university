@@ -17,6 +17,21 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publikuj\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -69,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Settings.cs" />
     <Page Include="controller\BankAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,9 +110,6 @@
       <DependentUpon>MoneyManager.tt</DependentUpon>
     </Compile>
     <Compile Include="model\bank_account.cs">
-      <DependentUpon>MoneyManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="model\company.cs">
       <DependentUpon>MoneyManager.tt</DependentUpon>
     </Compile>
     <Compile Include="model\expenses.cs">
@@ -126,13 +139,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MoneyManager.edmx</DependentUpon>
     </Compile>
-    <Compile Include="model\users.cs">
-      <DependentUpon>MoneyManager.tt</DependentUpon>
-    </Compile>
     <Compile Include="MoneyManagerDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MoneyManagerDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -160,16 +171,20 @@
     </None>
     <None Include="MoneyManagerDataSet.xsc">
       <DependentUpon>MoneyManagerDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="MoneyManagerDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>MoneyManagerDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="MoneyManagerDataSet.xss">
       <DependentUpon>MoneyManagerDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\MoneyManagerToUniversity.model.bank.datasource" />
     <None Include="Properties\DataSources\MoneyManagerToUniversity.model.bank_account.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -179,7 +194,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 i x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="model\MoneyManager.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -190,6 +216,13 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MoneyManager.edmx</DependentUpon>
       <LastGenOutput>MoneyManager.cs</LastGenOutput>
+    </Content>
+    <Content Include="MoneyManager.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MoneyManager_log.ldf">
+      <DependentUpon>MoneyManager.mdf</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
