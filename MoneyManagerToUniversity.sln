@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManagerToUniversity", "MoneyManagerToUniversity.csproj", "{0833A1BD-4DEC-4C3D-A681-B10D6CE0BEB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageMoneyToUniversityUnitTests", "..\ManageMoneyToUniversityUnitTests\ManageMoneyToUniversityUnitTests.csproj", "{24EDB309-F2E2-422B-A957-C49A2AB38355}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0833A1BD-4DEC-4C3D-A681-B10D6CE0BEB9} = {0833A1BD-4DEC-4C3D-A681-B10D6CE0BEB9}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +20,10 @@ Global
 		{0833A1BD-4DEC-4C3D-A681-B10D6CE0BEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0833A1BD-4DEC-4C3D-A681-B10D6CE0BEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0833A1BD-4DEC-4C3D-A681-B10D6CE0BEB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24EDB309-F2E2-422B-A957-C49A2AB38355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24EDB309-F2E2-422B-A957-C49A2AB38355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24EDB309-F2E2-422B-A957-C49A2AB38355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24EDB309-F2E2-422B-A957-C49A2AB38355}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
 ﻿using MoneyManagerToUniversity.model;
+using MoneyManagerToUniversity.service;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -84,12 +85,17 @@ namespace MoneyManagerToUniversity.controller
                 return;
             }
 
+            if (!(new AccountNumberValidator()).Validate(numberTextBox.Text))
+            {
+                MessageBox.Show("Giva bad account number!");
+                return;
+            }
+
             bank_account = new bank_account
             {
                 bank_id = bankId,
                 name = nameTextBox.Text,
                 current_ballance = currentBallance,
-                //TODO: validate and unit test
                 number = numberTextBox.Text,
                 created_at = DateTime.Now,
             };
@@ -118,11 +124,6 @@ namespace MoneyManagerToUniversity.controller
             {
                 MessageBox.Show("Give bad relationships ID");
             }
-        }
-
-        private void DeleteBankAccountCommandHandler(object sender, ExecutedRoutedEventArgs e)
-        {
-            MessageBox.Show(bankAccountIdToDelete.Text);
         }
     }
 }

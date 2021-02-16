@@ -7,12 +7,32 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     
-    <Grid>
+    <Grid x:Name="container">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="90*"/>
-            <RowDefinition Height="329*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button x:Name="open_bank_account_crud" Content="Bank account" Grid.Column="0" Grid.Row="0" Click="OpenBankAccountCRUD" Width="100" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+
+        <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="2">
+            <Grid x:Name="nav" Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="open_bank_account_crud" Content="Bank account" Grid.Column="0" Grid.Row="0" Click="OpenBankAccountCRUD" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+        </Border>
     </Grid>
 
 </Window>
