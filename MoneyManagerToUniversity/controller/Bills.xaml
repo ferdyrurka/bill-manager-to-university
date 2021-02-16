@@ -9,6 +9,7 @@
         Title="Bills" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <RoutedUICommand x:Key="SaveExpensesCommand" Text="Save expenses data"/>
+        <RoutedUICommand x:Key="DeletexpenseCommand" Text="Delete expenses"/>
 
         <Style x:Key="NavButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">
             <Setter Property="FontSize" Value="12"/>
@@ -20,6 +21,7 @@
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource SaveExpensesCommand}" Executed="SaveExpensesCommandHandler"/>
+        <CommandBinding Command="{StaticResource DeletexpenseCommand}" Executed="DeleteExpenseCommandHandler"/>
     </Window.CommandBindings>
     <Grid DataContext="{StaticResource expensesViewSource}">
         <Grid.ColumnDefinitions>
@@ -65,6 +67,13 @@
                 <DataGridTextColumn x:Name="expenses_type_idColumn" Binding="{Binding expenses_type_id}" Header="expenses type id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="idColumn1" IsReadOnly="True" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="valueColumn" Binding="{Binding value}" Header="value" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="deleteColumn" Header="Delete" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnDExpensesType" Content="Del" Command="{StaticResource DeletexpenseCommand}" CommandParameter="{Binding}" Style="{StaticResource NavButton}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

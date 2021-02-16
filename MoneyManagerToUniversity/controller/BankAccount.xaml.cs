@@ -64,6 +64,12 @@ namespace MoneyManagerToUniversity.controller
 
         private void SaveBanksCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
+            bankSource.View.Refresh();
+            bankSource.View.MoveCurrentToFirst();
+
+            bankAccountSource.View.Refresh();
+            bankAccountSource.View.MoveCurrentToFirst();
+
             context.SaveChanges();
         }
 
@@ -102,28 +108,40 @@ namespace MoneyManagerToUniversity.controller
 
             context.bank_account.Local.Insert(context.bank_account.Local.Count(), bank_account);
 
-            bankSource.View.Refresh();
-            bankSource.View.MoveCurrentTo(bank_account);
-
-            try
-            {
-                context.SaveChanges();
-            } catch(Exception)
-            {
-                MessageBox.Show("Give bad relationships ID");
-            }
+            this.SaveBanksAccountCommandHandler(sender, e);
         }
 
         private void SaveBanksAccountCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            try
+            var changesEntities = from ce in context.ChangeTracker.Entries()
+                                  where ce.State != EntityState.Unchanged
+                                  select ce;
+
+            foreach (var change in changesEntities)
             {
-                context.SaveChanges();
+                if (change.Entity is bank_account)
+                {
+                    bank_account bank_account = (bank_account)change.Entity;
+
+                    var type = (from o in context.bank
+                                where o.id == bank_account.bank_id
+                                select o).FirstOrDefault();
+
+                    if (type == null)
+                    {
+                        MessageBox.Show("Give invalid relationship id for expense id: " + bank_account.id);
+                        return;
+                    }
+                }
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Give bad relationships ID");
-            }
+
+            bankSource.View.Refresh();
+            bankSource.View.MoveCurrentToFirst();
+
+            bankAccountSource.View.Refresh();
+            bankAccountSource.View.MoveCurrentToFirst();
+
+            context.SaveChanges();
         }
     }
 }

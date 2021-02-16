@@ -72,7 +72,30 @@ namespace MoneyManagerToUniversity.controller
                 }
             }
 
-           context.SaveChanges();
+            expensesTypeSource.View.Refresh();
+            expensesTypeSource.View.MoveCurrentToFirst();
+
+            expensesSource.View.Refresh();
+            expensesSource.View.MoveCurrentToFirst();
+
+            context.SaveChanges();
+        }
+
+        private void DeleteExpenseCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            expenses obj = e.Parameter as expenses;
+
+            if (obj == null)
+            {
+                return;
+            }
+
+            context.expenses.Remove(obj);
+
+            expensesSource.View.Refresh();
+            expensesSource.View.MoveCurrentToFirst();
+
+            context.SaveChanges();
         }
     }
 }
