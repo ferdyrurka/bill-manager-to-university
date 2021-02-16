@@ -37,5 +37,11 @@ namespace MoneyManagerToUniversity
             Window window = new Bills();
             window.Show();
         }
+
+        private void OpenIncomesCRUD(object sender, RoutedEventArgs e)
+        {
+            Window window = new Incomes();
+            window.Show();
+        }
     }
 }

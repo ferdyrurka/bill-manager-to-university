@@ -1,12 +1,79 @@
-﻿<Window x:Class="MoneyManagerToUniversity.controller.Incomes"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoneyManagerToUniversity.controller"
+        xmlns:model="clr-namespace:MoneyManagerToUniversity.model" x:Class="MoneyManagerToUniversity.controller.Incomes"
         mc:Ignorable="d"
-        Title="Incomes" Height="450" Width="800">
-    <Grid>
-        
+        Title="Incomes" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <RoutedUICommand x:Key="SaveIncomesCommand" Text="Save incomes data"/>
+        <RoutedUICommand x:Key="DeleteIncomesCommand" Text="Delete income"/>
+
+        <Style x:Key="NavButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <CollectionViewSource x:Key="incomes_typeViewSource" d:DesignSource="{d:DesignInstance {x:Type model:incomes_type}, CreateList=True}"/>
+        <CollectionViewSource x:Key="incomesViewSource" d:DesignSource="{d:DesignInstance {x:Type model:incomes}, CreateList=True}"/>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource SaveIncomesCommand}" Executed="SaveIncomesCommandHandler"/>
+        <CommandBinding Command="{StaticResource DeleteIncomesCommand}" Executed="DeleteIncomesCommandHandler"/>
+    </Window.CommandBindings>
+    <Grid DataContext="{StaticResource incomes_typeViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Center">Manage your incomes</Label>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid x:Name="incomes_typeDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="idColumn" IsReadOnly="True" Width="SizeToHeader" Header="id" Binding="{Binding id}"/>
+                    <DataGridTextColumn x:Name="nameColumn" Width="SizeToHeader" Header="name" Binding="{Binding name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" DataContext="{StaticResource incomesViewSource}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                <Button Name="btnSExpensesType" Content="Save" Command="{StaticResource SaveIncomesCommand}" Style="{StaticResource NavButton}"/>
+            </StackPanel>
+        </Grid>
+        <DataGrid x:Name="incomesDataGrid" AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource incomesViewSource}}" Grid.RowSpan="2" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="account_ballanceColumn" Binding="{Binding account_ballance}" Header="account ballance" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="created_atColumn" Header="created at" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding created_at, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="idColumn1" IsReadOnly="True" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="incomes_type_idColumn" Binding="{Binding incomes_type_id}" Header="incomes type id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="valueColumn" Binding="{Binding value}" Header="value" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="deleteColumn" Header="Delete" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnDExpensesType" Content="Del" Command="{StaticResource DeleteIncomesCommand}" CommandParameter="{Binding}" Style="{StaticResource NavButton}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

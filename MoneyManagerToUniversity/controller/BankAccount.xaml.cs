@@ -54,12 +54,17 @@ namespace MoneyManagerToUniversity.controller
                 name = bankName.Text,
             };
 
-            context.bank.Local.Insert(context.bank.Local.Count(), bank);
+            try {
+                context.bank.Local.Insert(context.bank.Local.Count(), bank);
 
-            bankSource.View.Refresh();
-            bankSource.View.MoveCurrentTo(bank);
+                bankSource.View.Refresh();
+                bankSource.View.MoveCurrentTo(bank);
 
-            context.SaveChanges();
+                context.SaveChanges();
+            } catch(Exception)
+            {
+                MessageBox.Show("Something went wrong");
+            }
         }
 
         private void CreateAndSaveBanksAccountCommandHandler(object sender, ExecutedRoutedEventArgs e)
@@ -124,13 +129,19 @@ namespace MoneyManagerToUniversity.controller
                 }
             }
 
-            bankSource.View.Refresh();
-            bankSource.View.MoveCurrentToFirst();
+            try
+            {
+                bankSource.View.Refresh();
+                bankSource.View.MoveCurrentToFirst();
 
-            bankAccountSource.View.Refresh();
-            bankAccountSource.View.MoveCurrentToFirst();
+                bankAccountSource.View.Refresh();
+                bankAccountSource.View.MoveCurrentToFirst();
 
-            context.SaveChanges();
+                context.SaveChanges();
+            } catch(Exception)
+            {
+                MessageBox.Show("Something went wrong");
+            }
         }
     }
 }

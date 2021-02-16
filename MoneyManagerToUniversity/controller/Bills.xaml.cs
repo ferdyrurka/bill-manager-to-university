@@ -72,13 +72,19 @@ namespace MoneyManagerToUniversity.controller
                 }
             }
 
-            expensesTypeSource.View.Refresh();
-            expensesTypeSource.View.MoveCurrentToFirst();
+            try
+            {
+                expensesTypeSource.View.Refresh();
+                expensesTypeSource.View.MoveCurrentToFirst();
 
-            expensesSource.View.Refresh();
-            expensesSource.View.MoveCurrentToFirst();
+                expensesSource.View.Refresh();
+                expensesSource.View.MoveCurrentToFirst();
 
-            context.SaveChanges();
+                context.SaveChanges();
+            } catch(Exception)
+            {
+                MessageBox.Show("Something went wrong");
+            }
         }
 
         private void DeleteExpenseCommandHandler(object sender, ExecutedRoutedEventArgs e)
@@ -90,12 +96,18 @@ namespace MoneyManagerToUniversity.controller
                 return;
             }
 
-            context.expenses.Remove(obj);
+            try
+            {
+                context.expenses.Remove(obj);
 
-            expensesSource.View.Refresh();
-            expensesSource.View.MoveCurrentToFirst();
+                expensesSource.View.Refresh();
+                expensesSource.View.MoveCurrentToFirst();
 
-            context.SaveChanges();
-        }
+                context.SaveChanges();
+            } catch(Exception)
+            {
+                MessageBox.Show("Something went wrong");
+            }
+}
     }
 }

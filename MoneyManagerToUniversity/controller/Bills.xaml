@@ -45,12 +45,12 @@
 
             <DataGrid x:Name="expenses_typeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="idColumn" IsReadOnly="True" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="nameColumn" Binding="{Binding name}" Header="name" Width="SizeToHeader"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" DataContext="{StaticResource expenses_typeViewSource}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" DataContext="{StaticResource expenses_typeViewSource}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                 <Button Name="btnSExpensesType" Content="Save" Command="{StaticResource SaveExpensesCommand}" Style="{StaticResource NavButton}"/>
             </StackPanel>
         </Grid>

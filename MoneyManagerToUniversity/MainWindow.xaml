@@ -32,6 +32,7 @@
 
                 <Button x:Name="open_bank_account_crud" Content="Bank account" Grid.Column="0" Grid.Row="0" Click="OpenBankAccountCRUD" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <Button x:Name="open_bills_crud" Content="Bills" Grid.Column="1" Grid.Row="0" Click="OpenBillsCRUD" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Button x:Name="open_incomes_crud" Content="Incomes" Grid.Column="0" Grid.Row="1" Click="OpenIncomesCRUD" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </Border>
     </Grid>
