@@ -17,4 +17,4 @@
 
 ## Author
 
-(Łukasz Staniszewski)[https://lukaszstaniszewski.pl] - (kontakt@lukaszstaniszewski.pl)[mailto:kontakt@lukaszstaniszewski.pl]
+[Łukasz Staniszewski](https://lukaszstaniszewski.pl) - [kontakt@lukaszstaniszewski.pl](mailto:kontakt@lukaszstaniszewski.pl)
