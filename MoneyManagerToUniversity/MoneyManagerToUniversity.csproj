@@ -194,6 +194,9 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\MoneyManagerToUniversity.model.bank.datasource" />
     <None Include="Properties\DataSources\MoneyManagerToUniversity.model.bank_account.datasource" />
+    <None Include="Properties\DataSources\MoneyManagerToUniversity.model.expenses.datasource" />
+    <None Include="Properties\DataSources\MoneyManagerToUniversity.model.expenses_type.datasource" />
+    <None Include="Properties\DataSources\MoneyManagerToUniversity.model.incomes_type.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

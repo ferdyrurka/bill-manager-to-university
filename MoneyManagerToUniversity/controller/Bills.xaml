@@ -1,12 +1,71 @@
-﻿<Window x:Class="MoneyManagerToUniversity.controller.Bills"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoneyManagerToUniversity.controller"
+        xmlns:model="clr-namespace:MoneyManagerToUniversity.model" x:Class="MoneyManagerToUniversity.controller.Bills"
         mc:Ignorable="d"
-        Title="Bills" Height="450" Width="800">
-    <Grid>
-        
+        Title="Bills" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <RoutedUICommand x:Key="SaveExpensesCommand" Text="Save expenses data"/>
+
+        <Style x:Key="NavButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <CollectionViewSource x:Key="expenses_typeViewSource" d:DesignSource="{d:DesignInstance {x:Type model:expenses_type}, CreateList=True}"/>
+        <CollectionViewSource x:Key="expensesViewSource" d:DesignSource="{d:DesignInstance {x:Type model:expenses}, CreateList=True}"/>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource SaveExpensesCommand}" Executed="SaveExpensesCommandHandler"/>
+    </Window.CommandBindings>
+    <Grid DataContext="{StaticResource expensesViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Center">Manage your bills</Label>
+
+        <Grid DataContext="{StaticResource expenses_typeViewSource}" Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid x:Name="expenses_typeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="nameColumn" Binding="{Binding name}" Header="name" Width="SizeToHeader"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" DataContext="{StaticResource expenses_typeViewSource}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                <Button Name="btnSExpensesType" Content="Save" Command="{StaticResource SaveExpensesCommand}" Style="{StaticResource NavButton}"/>
+            </StackPanel>
+        </Grid>
+        <DataGrid x:Name="expensesDataGrid" AutoGenerateColumns="False" Grid.ColumnSpan="2" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" Grid.RowSpan="2" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="account_ballanceColumn" Binding="{Binding account_ballance}" Header="account ballance" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="created_atColumn" IsReadOnly="True" Header="created at" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker x:Name="createdAtColumn" SelectedDate="{Binding created_at, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="expenses_type_idColumn" Binding="{Binding expenses_type_id}" Header="expenses type id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="idColumn1" IsReadOnly="True" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="valueColumn" Binding="{Binding value}" Header="value" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

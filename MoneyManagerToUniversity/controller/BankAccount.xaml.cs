@@ -105,8 +105,6 @@ namespace MoneyManagerToUniversity.controller
             bankSource.View.Refresh();
             bankSource.View.MoveCurrentTo(bank_account);
 
-            context.SaveChanges();
-
             try
             {
                 context.SaveChanges();

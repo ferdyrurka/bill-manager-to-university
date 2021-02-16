@@ -67,7 +67,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <Grid x:Name="grid1" VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1">
+        <Grid x:Name="grid1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

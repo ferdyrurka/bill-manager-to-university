@@ -31,5 +31,11 @@ namespace MoneyManagerToUniversity
             Window window = new BankAccount();
             window.Show();
         }
+
+        private void OpenBillsCRUD(object sender, RoutedEventArgs e)
+        {
+            Window window = new Bills();
+            window.Show();
+        }
     }
 }
