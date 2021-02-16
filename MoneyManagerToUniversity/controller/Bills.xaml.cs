@@ -25,6 +25,9 @@ namespace MoneyManagerToUniversity.controller
         CollectionViewSource expensesTypeSource;
         CollectionViewSource expensesSource;
 
+        /// <summary>
+        /// Create context and set source
+        /// </summary>
         public Bills()
         {
             InitializeComponent();
@@ -34,6 +37,9 @@ namespace MoneyManagerToUniversity.controller
             DataContext = this;
         }
 
+        /// <summary>
+        /// Load data for window from db
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             context.expenses_type.Load();
@@ -43,6 +49,11 @@ namespace MoneyManagerToUniversity.controller
             expensesSource.Source = context.expenses.Local;
         }
 
+
+        /// <summary>
+        /// Save expense update or/and create, set createdAt date, check good set relationships id for expense_type
+        /// If it encounters a sudden error, it will notify the user about it, e.g.sudden deletion of the table
+        /// </summary>
         private void SaveExpensesCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             var changesEntities = from ce in context.ChangeTracker.Entries()
@@ -87,6 +98,10 @@ namespace MoneyManagerToUniversity.controller
             }
         }
 
+        /// <summary>
+        /// Delete expense for clicked object
+        /// If it encounters a sudden error, it will notify the user about it, e.g.sudden deletion of the table
+        /// </summary>
         private void DeleteExpenseCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             expenses obj = e.Parameter as expenses;

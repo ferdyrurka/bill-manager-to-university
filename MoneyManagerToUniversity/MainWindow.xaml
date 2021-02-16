@@ -19,6 +19,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold">Manage your money</Label>
+        
         <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="2">
             <Grid x:Name="nav" Grid.Column="1" Grid.Row="1">
                 <Grid.ColumnDefinitions>

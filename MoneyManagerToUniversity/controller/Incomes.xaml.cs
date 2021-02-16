@@ -25,6 +25,9 @@ namespace MoneyManagerToUniversity.controller
         CollectionViewSource incomesTypeSource;
         CollectionViewSource incomesSource;
 
+        /// <summary>
+        /// Create context and set source
+        /// </summary>
         public Incomes()
         {
             InitializeComponent();
@@ -34,6 +37,9 @@ namespace MoneyManagerToUniversity.controller
             DataContext = this;
         }
 
+        /// <summary>
+        /// Load data for window from db
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             context.incomes_type.Load();
@@ -43,6 +49,10 @@ namespace MoneyManagerToUniversity.controller
             incomesSource.Source = context.incomes.Local;
         }
 
+        /// <summary>
+        /// Save incomes update or/and create, set createdAt date, check good set relationships id for incomes_type
+        /// If it encounters a sudden error, it will notify the user about it, e.g.sudden deletion of the table
+        /// </summary>
         private void SaveIncomesCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             var changesEntities = from ce in context.ChangeTracker.Entries()
@@ -88,6 +98,10 @@ namespace MoneyManagerToUniversity.controller
             
         }
 
+        /// <summary>
+        /// Delete income for clicked object
+        /// If it encounters a sudden error, it will notify the user about it, e.g.sudden deletion of the table
+        /// </summary>
         private void DeleteIncomesCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             incomes obj = e.Parameter as incomes;

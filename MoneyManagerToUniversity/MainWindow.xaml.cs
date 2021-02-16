@@ -26,18 +26,27 @@ namespace MoneyManagerToUniversity
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Open bank account window
+        /// </summary>
         private void OpenBankAccountCRUD(object sender, RoutedEventArgs e)
         {
             Window window = new BankAccount();
             window.Show();
         }
 
+        /// <summary>
+        /// Open bills window
+        /// </summary>
         private void OpenBillsCRUD(object sender, RoutedEventArgs e)
         {
             Window window = new Bills();
             window.Show();
         }
 
+        /// <summary>
+        /// Open incomes window
+        /// </summary>
         private void OpenIncomesCRUD(object sender, RoutedEventArgs e)
         {
             Window window = new Incomes();

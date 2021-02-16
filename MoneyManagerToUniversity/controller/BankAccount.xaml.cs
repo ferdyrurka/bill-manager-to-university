@@ -26,6 +26,9 @@ namespace MoneyManagerToUniversity.controller
         CollectionViewSource bankSource;
         CollectionViewSource bankAccountSource;
 
+        /// <summary>
+        /// Create context and set source
+        /// </summary>
         public BankAccount()
         {
             InitializeComponent();
@@ -35,6 +38,9 @@ namespace MoneyManagerToUniversity.controller
             DataContext = this;
         }
 
+        /// <summary>
+        /// Load data for window from db
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -45,6 +51,11 @@ namespace MoneyManagerToUniversity.controller
             bankAccountSource.Source = context.bank_account.Local;
         }
 
+
+        /// <summary>
+        /// Create bank and save data from form
+        /// If it encounters a sudden error, it will notify the user about it, e.g.sudden deletion of the table
+        /// </summary>
         private void CreateAndSaveBanksCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             bank bank;
@@ -67,6 +78,10 @@ namespace MoneyManagerToUniversity.controller
             }
         }
 
+        /// <summary>
+        /// Create bank account and save data from form.
+        /// Check corretly data from user. If user give bad data show messages.
+        /// </summary>
         private void CreateAndSaveBanksAccountCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             bank_account bank_account;
@@ -81,13 +96,13 @@ namespace MoneyManagerToUniversity.controller
                 currentBallance = decimal.Parse(current_ballanceTextBox.Text);
             } catch(Exception)
             {
-                MessageBox.Show("Giva bad data, expceted int and decimal");
+                MessageBox.Show("Give bad data, expceted int and decimal");
                 return;
             }
 
             if (!(new AccountNumberValidator()).Validate(numberTextBox.Text))
             {
-                MessageBox.Show("Giva bad account number!");
+                MessageBox.Show("Give bad account number!");
                 return;
             }
 
@@ -105,6 +120,11 @@ namespace MoneyManagerToUniversity.controller
             this.SaveBanksDataCommandHandler(sender, e);
         }
 
+        /// <summary>
+        /// Save bank and bank account data (only update).
+        /// Check if set good relationships bank id in bank account entity.
+        /// If it encounters a sudden error, it will notify the user about it, e.g.sudden deletion of the table
+        /// </summary>
         private void SaveBanksDataCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             var changesEntities = from ce in context.ChangeTracker.Entries()
