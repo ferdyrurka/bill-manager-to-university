@@ -62,17 +62,6 @@ namespace MoneyManagerToUniversity.controller
             context.SaveChanges();
         }
 
-        private void SaveBanksCommandHandler(object sender, ExecutedRoutedEventArgs e)
-        {
-            bankSource.View.Refresh();
-            bankSource.View.MoveCurrentToFirst();
-
-            bankAccountSource.View.Refresh();
-            bankAccountSource.View.MoveCurrentToFirst();
-
-            context.SaveChanges();
-        }
-
         private void CreateAndSaveBanksAccountCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             bank_account bank_account;
@@ -108,10 +97,10 @@ namespace MoneyManagerToUniversity.controller
 
             context.bank_account.Local.Insert(context.bank_account.Local.Count(), bank_account);
 
-            this.SaveBanksAccountCommandHandler(sender, e);
+            this.SaveBanksDataCommandHandler(sender, e);
         }
 
-        private void SaveBanksAccountCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        private void SaveBanksDataCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             var changesEntities = from ce in context.ChangeTracker.Entries()
                                   where ce.State != EntityState.Unchanged

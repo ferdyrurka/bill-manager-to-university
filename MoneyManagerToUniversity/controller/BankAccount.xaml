@@ -10,8 +10,7 @@
     <Window.Resources>
         <CollectionViewSource x:Key="bank_accountViewSource" d:DesignSource="{d:DesignInstance {x:Type model:bank_account}, CreateList=True}"/>
         <CollectionViewSource x:Key="bankViewSource" d:DesignSource="{d:DesignInstance {x:Type model:bank}, CreateList=True}"/>
-        <RoutedUICommand x:Key="SaveBanksCommand" Text="Save banks command"/>
-        <RoutedUICommand x:Key="SaveBanksAccountCommand" Text="Save banks account command"/>
+        <RoutedUICommand x:Key="SaveBanksDataCommand" Text="Save banks data command"/>
         <RoutedUICommand x:Key="CreateAndSaveBanksCommand" Text="Create and save banks command"/>
         <RoutedUICommand x:Key="CreateAndSaveBanksAccountCommand" Text="Create and save banks account command"/>
 
@@ -22,8 +21,7 @@
         </Style>
     </Window.Resources>
     <Window.CommandBindings>
-        <CommandBinding Command="{StaticResource SaveBanksCommand}" Executed="SaveBanksCommandHandler"/>
-        <CommandBinding Command="{StaticResource SaveBanksAccountCommand}" Executed="SaveBanksAccountCommandHandler"/>
+        <CommandBinding Command="{StaticResource SaveBanksDataCommand}" Executed="SaveBanksDataCommandHandler"/>
         <CommandBinding Command="{StaticResource CreateAndSaveBanksAccountCommand}" Executed="CreateAndSaveBanksAccountCommandHandler"/>
         <CommandBinding Command="{StaticResource CreateAndSaveBanksCommand}" Executed="CreateAndSaveBanksCommandHandler"/>
     </Window.CommandBindings>
@@ -63,7 +61,7 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" DataContext="{StaticResource bankViewSource}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                     <Button Name="btnCreateBank" Content="Create and save" Command="{StaticResource CreateAndSaveBanksCommand}" Style="{StaticResource NavButton}" Margin="0, 0, 15, 0"/>
-                    <Button Name="btnSaveBanks" Content="Save" Command="{StaticResource SaveBanksCommand}" Style="{StaticResource NavButton}"/>
+                    <Button Name="btnSaveBanks" Content="Save" Command="{StaticResource SaveBanksDataCommand}" Style="{StaticResource NavButton}"/>
                 </StackPanel>
             </Grid>
         </Grid>
@@ -93,7 +91,7 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="5" Grid.Column="1" DataContext="{StaticResource bank_accountViewSource}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                 <Button Name="btnCreateBankAccount" Content="Create and save" Command="{StaticResource CreateAndSaveBanksAccountCommand}" Style="{StaticResource NavButton}" Margin="0, 0, 15, 0"/>
-                <Button Name="saveBankAccount" Content="Save" Command="{StaticResource SaveBanksAccountCommand}" Style="{StaticResource NavButton}"/>
+                <Button Name="saveBankAccount" Content="Save" Command="{StaticResource SaveBanksDataCommand}" Style="{StaticResource NavButton}"/>
             </StackPanel>
         </Grid>
         <ListView x:Name="bankListView" Grid.ColumnSpan="1" Grid.RowSpan="1" ItemsSource="{Binding Source={StaticResource bankViewSource}}" Grid.Column="0" Grid.Row="0" SelectionMode="Single">
